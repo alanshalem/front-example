@@ -1,0 +1,115 @@
+{
+  "name": "@galicia/brick-spa-starter-kit",
+  "version": "1.0.2",
+  "scripts": {
+    "dev:mock": "cross-env ENV=local-mock node server.js",
+    "dev:pom": "cross-env ENV=local-pom node server.js",
+    "devtools": "npx react-devtools",
+    "prebuild": "shx rm -rf .next out",
+    "build": "gcba-spa build-widgets && next build && npm run export",
+    "start": "cross-env NODE_ENV=production node server.js",
+    "update": "npm run update:brick && npm run update:toolkit",
+    "update:brick": "npm i -S @brick/core@latest @brick/brand@latest",
+    "update:toolkit": "npm i -D @galicia-toolkit/eslint-config@latest && npm i -S @galicia-toolkit/core@latest",
+    "type-check": "tsc",
+    "test": "jest --verbose",
+    "export": "next export -o build",
+    "local:serve": "npm run build && npm run export && npx serve -s out",
+    "lint": "eslint --fix --ext .ts,.tsx,.js containers pages components contexts",
+    "prepare": "husky install",
+    "pretty": "prettier --write \"./**/*.{js,jsx,ts,tsx,json}\"",
+    "preinstall": "npm install --package-lock-only --ignore-scripts && npx npm-force-resolutions"
+  },
+  "dependencies": {
+    "@azure/msal-browser": "^2.38.3",
+    "@azure/msal-react": "1.4.7",
+    "@brick/brand": "^1.3.4",
+    "@brick/core": "^1.20.32",
+    "@brick/form": "^1.2.13",
+    "@brick/table": "1.0.7",
+    "@galicia-toolkit/core": "^7.4.10",
+    "@reach/router": "1.3.4",
+    "formik": "2.2.9",
+    "jest-canvas-mock": "2.4.0",
+    "lodash": "4.17.21",
+    "moment": "2.29.3",
+    "next": "10.2.3",
+    "react-app-polyfill": "1.0.6",
+    "react-hot-toast": "2.3.0",
+    "react-icons": "4.4.0",
+    "unorm": "1.5.0",
+    "yup": "0.32.11"
+  },
+  "devDependencies": {
+    "@babel/plugin-transform-runtime": "^7.18.6",
+    "@babel/preset-env": "^7.19.4",
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-conventional": "^8.3.4",
+    "@galicia-toolkit/babel-config": "^1.0.0",
+    "@galicia-toolkit/eslint-config": "0.0.13",
+    "@galicia-toolkit/spa-build-config": "^1.0.7",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.5.0",
+    "@types/jest": "^24.9.1",
+    "@types/reach__router": "^1.3.6",
+    "babel-jest": "^24.8.0",
+    "cross-env": "^6.0.3",
+    "eslint": "^6.8.0",
+    "express": "^4.17.1",
+    "husky": "^8.0.0",
+    "idx": "^2.5.6",
+    "jest": "^24.9.0",
+    "lint-staged": "^9.5.0",
+    "mq-polyfill": "^1.1.8",
+    "polyfill": "^0.1.0",
+    "prettier": "^1.19.1",
+    "react": "^18.2.0",
+    "serve": "^11.3.0",
+    "shx": "^0.3.3",
+    "styled-components": "^5.3.6",
+    "ts-jest": "^24.3.0",
+    "typescript": "^4.9.4"
+  },
+  "resolutions": {
+    "shell-quote": "1.7.3"
+  },
+  "publishConfig": {
+    "registry": "http://nexus.bancogalicia.com.ar/repository/npm-private/"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "lint-staged": {
+    "*.{js,json,css,md,ts,tsx}": [
+      "prettier --write",
+      "git add"
+    ],
+    "*.{js,ts,tsx}": [
+      "eslint --fix --ext .ts,.tsx,.js",
+      "git add"
+    ]
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "files": [
+    "build"
+  ],
+  "eslintConfig": {
+    "extends": "@galicia-toolkit",
+    "env": {
+      "jest": true
+    }
+  },
+  "prettier": {
+    "trailingComma": "es5",
+    "singleQuote": true
+  },
+  "globals": {
+    "window": {}
+  }
+}

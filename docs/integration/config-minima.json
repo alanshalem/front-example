@@ -1,0 +1,16 @@
+{
+  "props": {
+    "pageProps": {
+      "user": {
+        "theme": "classic"
+      },
+      "config": {
+        "appBasepath": "/prestamos/ini",
+        "cdnBasepath": "https://static-pre.devopenshift.bancogalicia.com.ar"
+      }
+    }
+  },
+  "page": "/",
+  "query": {},
+  "buildId": "development"
+}
